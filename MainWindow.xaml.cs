@@ -45,6 +45,8 @@ namespace Snake
             await ShowCountDown();
             Overlay.Visibility = Visibility.Hidden;
             await GameLoop();
+            await ShowGameOver();
+            gameState = new GameState(rows, cols);
         }
 
         private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -144,6 +146,13 @@ namespace Snake
                 OverlayText.Text = i.ToString();
                 await Task.Delay(500);
             }
+        }
+
+        private async Task ShowGameOver()
+        {
+            await Task.Delay(1000);
+            Overlay.Visibility = Visibility.Visible;
+            OverlayText.Text = "PRESS ANY KEY TO START";
         }
     }
 }
